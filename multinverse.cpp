@@ -6,7 +6,7 @@
 #include <iostream>
 #include <cstdio>
 
-typedef unsigned long long ll;
+typedef long long ll;
 using namespace std;
 
 ll ExtendedEuclidAlgorithm(ll a, ll b, long long & x, long long  & y, long long & d) {
@@ -42,9 +42,11 @@ int main(int argc, char const *argv[]){
 	cin >> a >> b;
 	resp = ExtendedEuclidAlgorithm(a, b, x, y, d);
 	if(d == 1)
-		cout << resp << endl;
+		if(resp >= 0)
+			cout << resp << endl;
+		else
+			cout << 1 + resp << endl;
 	else
 		cout << -1 << endl;
-	cin >> a;
 	return 0;
 }
