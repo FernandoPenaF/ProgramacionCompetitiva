@@ -1,40 +1,36 @@
 /*
 * La venganza de Silvio - https://omegaup.com/arena/problem/VenganzaDeSilvio
-* 25% correcto
+* GUID : 22ebf0b5
 */
 
 #include <iostream>
+#include <string>
 using namespace std;
+typedef unsigned long long int ulli;
+int binaryRep[1000001];
 
-long long binaryExp(long long x, long long n, long long mod){
-	long long resp = 1;
-	while(n > 0){
-		if(n % 2 == 1)
-			resp = (resp * x) % mod;
-		x = (x * x) % mod;
-		n = n / 2;
+ulli binaryExp(ulli n, ulli mod, int len){
+	ulli resp = 1;
+	int i = 0;
+	while(i < len){
+		resp = (resp * resp) % mod;
+		if(binaryRep[i] == 1)
+			resp = (resp * n) % mod;
+		i++;
 	}
 	return resp;
 }
 
-long long toDecimal(long long bin){
-	long long dec = 0;
-	long long mod = 0;
-	int i = 1;
-	while(bin != 0){
-		mod = bin % 10;
-		dec = dec + mod * i;
-		i *= 2;
-		bin /= 10;
-	}
-	return dec;
-}
-
-int main(int argc, char const *argv[])
-{
-	long long N, mod, M;
+int main(int argc, char const *argv[]){
+	ulli N, mod;
+	string M;
 	cin >> N >> mod;
 	cin >> M;
-	cout << binaryExp(N, toDecimal(M), mod) << endl;
+	unsigned int i = 0;
+	for(i = 0; i < M.length(); ++i) {
+		binaryRep[i] = M.at(i) - '0';
+	}
+
+	cout << binaryExp(N, mod, i) << endl;
 	return 0;
 }

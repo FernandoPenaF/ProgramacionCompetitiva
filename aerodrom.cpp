@@ -1,6 +1,6 @@
 /*
 * Aerodrom - https://omegaup.com/arena/problem/AERODROM
-	GUID : 816891ed
+* GUID : 816891ed
 */
 
 #include <iostream>
