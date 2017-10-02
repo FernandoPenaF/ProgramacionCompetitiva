@@ -1,6 +1,6 @@
 /*
 * Multinverse - https://omegaup.com/arena/problem/multinverse
-* 50% correcto
+* GUID : adde26c8
 */
 
 #include <iostream>
@@ -41,11 +41,12 @@ int main(int argc, char const *argv[]){
 	ll a, b, x, y, d, resp;
 	cin >> a >> b;
 	resp = ExtendedEuclidAlgorithm(a, b, x, y, d);
-	if(d == 1)
-		if(resp >= 0)
-			cout << resp << endl;
-		else
-			cout << 1 + resp << endl;
+
+	if(d == 1){
+		while(resp < 0)
+			resp += b;
+		cout << resp << endl;
+	}
 	else
 		cout << -1 << endl;
 	return 0;
