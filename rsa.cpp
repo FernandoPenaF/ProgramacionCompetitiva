@@ -1,3 +1,8 @@
+/*
+* RSA - https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4664
+* ID : 20122006
+*/
+
 #include <iostream>
 #include <math.h>
 using namespace std;
@@ -48,18 +53,18 @@ ll ExtendedEuclidAlgorithm(ll a, ll b, ll & x, ll & y, ll & d) {
 
 int main(int argc, char const *argv[]){
 	ll N, E, C;
-	cin >> N >> E >> C;
+	while(scanf("%ld %ld %ld", &N, &E, &C) == 3){
+		int lim = (int) sqrt(N);
+		ll phiEu = N;
+		for(unsigned p = 1; p < lim; p++) {
+			if(N % p == 0)
+				phiEu = (p - 1) * (N/p - 1);
+		}
 
-	int lim = (int) sqrt(N);
-	ll phiEu = N;
-	for(unsigned p = 1; p < lim; p++) {
-		if(N % p == 0)
-			phiEu = (p - 1) * (N/p - 1);
+		ll x, y, d, inv;
+		inv = ExtendedEuclidAlgorithm(E, phiEu, x, y, d);
+
+		cout << binaryExp(C, inv, N) << endl;
 	}
-
-	ll x, y, d, inv;
-	inv = ExtendedEuclidAlgorithm(E, phiEu, x, y, d);
-
-	cout << binaryExp(C, inv, N) << endl;
 	return 0;
 }
