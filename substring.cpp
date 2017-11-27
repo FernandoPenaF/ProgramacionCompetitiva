@@ -1,6 +1,11 @@
+/*
+* Substring and Subsequence - http://codeforces.com/problemset/problem/163/A
+* GUID : 32733143
+*/
+
 #include <stdio.h>
-int dp[5000][5000];
-char s[5000], t[5000];
+int dp[5001][5001];
+char s[5001], t[5001];
 int mod = 1000000007;
 
 int main(int argc, char const *argv[]){
@@ -14,10 +19,9 @@ int main(int argc, char const *argv[]){
 			dp[i + 1][j + 1] = (dp[i + 1][j] + (t[j] == s[i]) * (dp[i][j] + 1)) % mod;
 		}
 	}
-	for(i = 0; i < s[i]; i++) {
+	for(i = 0; s[i]; i++) {
 		resp = (resp + dp[i + 1][j]) % mod;
 	}
 	printf("%d\n", resp);
-	scanf("%d", &resp);
 	return 0;
 }
