@@ -59,7 +59,7 @@ int main(){
             cout << "NONE" << endl;
         else{
             resp = ComputeLineIntersection(a, b, c, d);
-            cout << fixed << setprecision(2) << resp.x << " " << resp.y << endl;
+            cout << "POINT "<< fixed << setprecision(2) << resp.x << " " << resp.y << endl;
         }
     }
     cout << "END OF OUTPUT" << endl;
