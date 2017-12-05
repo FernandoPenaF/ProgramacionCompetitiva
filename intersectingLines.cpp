@@ -41,14 +41,27 @@ PT ComputeLineIntersection ( PT a , PT b , PT c , PT d) {
 
 int main(){
     int n;
-    PT a = PT(0, 0);
-    PT b = PT(4, 4);
-    PT c = PT(0, 4);
-    PT d = PT(4, 0);
-    PT resp = ComputeLineIntersection(a, b, c, d);
-    cout << fixed << setprecision(2) << resp.x << " " << resp.y << endl;
-    cout << "INTERSECTING LINES OUTPUT" << endl;
-    cout << "END OF OUTPUT" << endl;
+    double x1, y1, x2, y2, x3, y3, x4, y4;
+    PT a, b, c, d, resp;
+
     cin >> n;
+    cout << "INTERSECTING LINES OUTPUT" << endl;
+    for(unsigned i = 0; i < n; i++) {
+        cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+        a = PT(x1, y1);
+        b = PT(x2, y2);
+        c = PT(x3, y3);
+        d = PT(x4, y4);
+
+        if(LinesCollinear(a, b, c, d))
+            cout << "LINE" << endl;
+        else if(LinesParallel(a, b, c, d))
+            cout << "NONE" << endl;
+        else{
+            resp = ComputeLineIntersection(a, b, c, d);
+            cout << fixed << setprecision(2) << resp.x << " " << resp.y << endl;
+        }
+    }
+    cout << "END OF OUTPUT" << endl;
     return 0;
 }
