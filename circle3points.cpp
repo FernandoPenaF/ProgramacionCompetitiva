@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <iomanip>
-
+#include <string>
 using namespace std;
 
 struct PT {
@@ -36,15 +36,38 @@ PT ComputeCircleCenter ( PT a , PT b , PT c) {
 	RotateCW90 (a - c));
 }
 
+string getHKEq(PT a, PT resp){
+	string sign, eq = "";
+	cout << resp.x;
+	if(resp.x == 0){
+		eq += "x^2 + ";
+	} else {
+		sign = resp.x > 0 ? "- " : "+ ";
+		eq += "(x " + sign + to_string(fabs(resp.x)) + ")^2 + ";
+	}
+	if(resp.y == 0){
+		eq += "y^2 = ";
+	} else {
+		sign = resp.y > 0 ? "- " : "+ ";
+		eq += "(y " + sign + to_string(fabs(resp.y)) + ")^2 = ";
+	}
+	eq += to_string(sqrt(dist2(a, resp)));
+	return eq;
+}
+
 int main(int argc, char const *argv[]){
-	int n;
-	PT a = PT(7, -5);
-	PT b = PT(-1, 1);
-	PT c = PT(0, -6);
-	PT resp = ComputeCircleCenter(a, b, c);
-	cout << resp.x << " " << resp.y << endl;
-	cout << sqrt(dist2(b, resp)) << endl;
-	cout << dist2(a, resp) << endl;
-	cin >> n;
+	double x1, y1, x2, y2, x3, y3;
+	PT a, b, c, r;
+	int n = 1;
+	while(n == 1){
+		cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+		PT a = PT(x1, y1);
+		PT b = PT(x1, y1);
+		PT c = PT(x1, y1);
+		PT resp = ComputeCircleCenter(a, b, c);
+		cout << a.x << endl;
+        cout << getHKEq(a, resp) << endl;
+        n++;
+	}
 	return 0;
 }
