@@ -116,6 +116,5 @@ int main(int argc, char const *argv[]){
 		cout << getGenEq(a, resp) << endl;
 		cout << endl;
 	}
-	cin >> n;
 	return 0;
 }
