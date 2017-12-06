@@ -1,7 +1,13 @@
+/*
+* Circle Through Three Points - https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=126
+* ID : 20449074
+*/
+
 #include <iostream>
 #include <math.h>
 #include <iomanip>
 #include <string>
+#include <sstream>
 using namespace std;
 
 struct PT {
@@ -38,36 +44,78 @@ PT ComputeCircleCenter ( PT a , PT b , PT c) {
 
 string getHKEq(PT a, PT resp){
 	string sign, eq = "";
-	cout << resp.x;
+	ostringstream stream;
+	
 	if(resp.x == 0){
 		eq += "x^2 + ";
 	} else {
 		sign = resp.x > 0 ? "- " : "+ ";
-		eq += "(x " + sign + to_string(fabs(resp.x)) + ")^2 + ";
+        stream << fixed << setprecision(3) << fabs(resp.x);
+		eq += "(x " + sign + stream.str() + ")^2 + ";
+		stream.str("");
 	}
 	if(resp.y == 0){
 		eq += "y^2 = ";
 	} else {
 		sign = resp.y > 0 ? "- " : "+ ";
-		eq += "(y " + sign + to_string(fabs(resp.y)) + ")^2 = ";
+		stream << fixed << setprecision(3) << fabs(resp.y);
+		eq += "(y " + sign + stream.str() + ")^2 = ";
+		stream.str("");
 	}
-	eq += to_string(sqrt(dist2(a, resp)));
+	stream << fixed << setprecision(3) << sqrt(dist2(a, resp));
+	eq += stream.str() + "^2";
+	return eq;
+}
+
+string getGenEq(PT a, PT resp){
+	ostringstream stream;
+	double c, d, e;
+	string sign, eq = "x^2 + y^2";
+	
+	c = 2 * resp.x;
+	d = 2 * resp.y;
+	e = (resp.x * resp.x) + (resp.y * resp.y) - dist2(a, resp);
+	
+	//c
+	if(c != 0){
+		sign = c > 0 ? " - " : " + ";
+		stream << fixed << setprecision(3) << fabs(c) << "x";
+		eq += sign + stream.str();
+		stream.str("");
+	}
+
+	//d
+	if(d != 0){
+		sign = d > 0 ? " - " : " + ";
+	    stream << fixed << setprecision(3) << fabs(d) << "y";
+		eq += sign + stream.str();
+		stream.str("");
+	}
+
+	//e
+	if(e != 0){
+		sign = e > 0 ? " + " : " - ";
+    	stream << fixed << setprecision(3) << fabs(e);
+		eq += sign + stream.str();
+		stream.str("");
+	}
+	eq += " = 0";
 	return eq;
 }
 
 int main(int argc, char const *argv[]){
+	int n;
 	double x1, y1, x2, y2, x3, y3;
-	PT a, b, c, r;
-	int n = 1;
-	while(n == 1){
-		cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+
+	while(scanf("%lf %lf %lf %lf %lf %lf", &x1, &y1, &x2, &y2, &x3, &y3) != EOF){
 		PT a = PT(x1, y1);
-		PT b = PT(x1, y1);
-		PT c = PT(x1, y1);
+		PT b = PT(x2, y2);
+		PT c = PT(x3, y3);
 		PT resp = ComputeCircleCenter(a, b, c);
-		cout << a.x << endl;
-        cout << getHKEq(a, resp) << endl;
-        n++;
+		cout << getHKEq(a, resp) << endl;
+		cout << getGenEq(a, resp) << endl;
+		cout << endl;
 	}
+	cin >> n;
 	return 0;
 }
