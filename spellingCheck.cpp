@@ -1,3 +1,8 @@
+/*
+* Spelling check -http://codeforces.com/problemset/problem/39/J
+* ID : 33072004
+*/
+
 #include <iostream>
 #include <math.h>
 #include <vector>
@@ -29,13 +34,14 @@ int main(){
     if(fabs(len1 - len2) == 1){
 		computeHashes(s1, s2, len2);
 		hsh1[len2 + 1] = hsh1[len2];
+
 		for (unsigned i=0; i < len1; i++){
 		    if ((hsh2[i] + hsh1[len1] - hsh1[i]) == len2) {
 		    	queue.push_back(i + 1);
 		    }
 		}
-		size = queue.size();
 
+		size = queue.size();
 		cout << size << endl;
 		for (unsigned i = 0; i < size; i++){
 		    cout << queue.at(i) << " ";
